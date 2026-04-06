@@ -7,10 +7,10 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 import asyncio
 
-from src.fahimni.db.base import Base
-from src.fahimni.core.config import settings
+from fahimni.core.config import settings
+from fahimni.db.base import Base
 
-import src.fahimni.models
+import fahimni.models
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -66,6 +66,7 @@ async def run_async_migrations() -> None:
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        connect_args={"ssl": False},
     )
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)

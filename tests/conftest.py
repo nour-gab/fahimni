@@ -1,10 +1,8 @@
 """Shared pytest fixtures for fahimni test suite."""
 
-import asyncio
 from collections.abc import AsyncGenerator
 
 import asyncpg
-import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.engine.url import make_url
