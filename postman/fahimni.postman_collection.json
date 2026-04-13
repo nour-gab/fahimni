@@ -117,6 +117,81 @@
         },
         "url": { "raw": "{{baseUrl}}/api/v1/grades", "host": ["{{baseUrl}}"], "path": ["api", "v1", "grades"] }
       }
+    },
+    {
+      "name": "AI RAG Ask",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_id\": \"{{courseId}}\",\n  \"question\": \"Explain recursion simply\",\n  \"task_hint\": \"simple explanation\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/ai/rag/ask", "host": ["{{baseUrl}}"], "path": ["api", "v1", "ai", "rag", "ask"] }
+      }
+    },
+    {
+      "name": "AI Hybrid Search",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_id\": \"{{courseId}}\",\n  \"query\": \"Find where recursion is explained\",\n  \"k\": 5\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/ai/search/hybrid", "host": ["{{baseUrl}}"], "path": ["api", "v1", "ai", "search", "hybrid"] }
+      }
+    },
+    {
+      "name": "AI Teacher Analyze",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_id\": \"{{courseId}}\",\n  \"content\": \"Recursion is when a function calls itself. Base cases stop infinite loops.\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/ai/teacher/analyze", "host": ["{{baseUrl}}"], "path": ["api", "v1", "ai", "teacher", "analyze"] }
+      }
+    },
+    {
+      "name": "AI Multi-Agent Orchestrate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"course_id\": \"{{courseId}}\",\n  \"student_id\": \"{{studentId}}\",\n  \"prompt\": \"Build me a study strategy for recursion\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/ai/agents/orchestrate", "host": ["{{baseUrl}}"], "path": ["api", "v1", "ai", "agents", "orchestrate"] }
+      }
+    },
+    {
+      "name": "AI Answer Evaluate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reference_answer\": \"Recursion solves a problem by reducing it to smaller versions and using a base case.\",\n  \"student_answer\": \"A recursive function calls itself with smaller input until a stop case.\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/ai/answers/evaluate", "host": ["{{baseUrl}}"], "path": ["api", "v1", "ai", "answers", "evaluate"] }
+      }
     }
   ]
 }

@@ -1,7 +1,7 @@
 """Reusable FastAPI dependencies for authentication and authorization."""
 
 import uuid
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -37,7 +37,7 @@ async def get_current_user(
     return user
 
 
-def require_role(*roles: UserRole) -> Callable[[User], User]:
+def require_role(*roles: UserRole) -> Callable[[User], Awaitable[User]]:
     """Return a dependency that enforces one of the allowed roles."""
 
     async def _dependency(current_user: User = Depends(get_current_user)) -> User:

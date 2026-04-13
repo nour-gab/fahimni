@@ -2,9 +2,9 @@
 
 import logging
 from datetime import UTC, datetime, timedelta
-from typing import Any
+from typing import Any, cast
 
-from jose import JWTError, jwt
+from jose import JWTError, jwt  # type: ignore[import-untyped]
 from passlib.context import CryptContext
 
 from fahimni.core.config import settings
@@ -25,11 +25,12 @@ def verify_password(plain: str, hashed: str) -> bool:
 def create_access_token(subject: str, role: str) -> str:
     expire = datetime.now(UTC) + timedelta(minutes=settings.access_token_expire_minutes)
     payload = {"sub": subject, "role": role, "exp": expire}
-    return jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm)
+    return cast(str, jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm))
 
 
 def decode_access_token(token: str) -> dict[str, Any]:
     try:
-        return jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        decoded = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        return cast(dict[str, Any], decoded)
     except JWTError as exc:
         raise ValueError("Invalid or expired token") from exc

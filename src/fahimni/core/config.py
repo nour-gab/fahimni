@@ -18,8 +18,14 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
-    # Anthropic
-    anthropic_api_key: str = Field(..., description="Claude API key")
+    # HuggingFace / LangChain
+    huggingface_model_id: str = "google/flan-t5-small"
+    huggingface_api_token: str = Field(default="", description="HuggingFace API token")
+    embedding_model_id: str = "BAAI/bge-small-en-v1.5"
+    vector_store_path: str = ".chroma"
+
+    # OCR
+    tesseract_cmd: str | None = None
 
     # MinIO
     minio_endpoint: str = "localhost:9000"
