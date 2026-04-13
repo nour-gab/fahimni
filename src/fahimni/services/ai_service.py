@@ -24,6 +24,8 @@ class SearchHit:
     text: str
     source: str
     score: float
+    page: int = 1
+    highlight: str = ""
 
 
 class AIService:
@@ -167,7 +169,17 @@ class AIService:
             semantic_score = 1.0 / float(i + 1)
             keyword_score = bm25_scores[i]
             score = (0.65 * semantic_score) + (0.35 * keyword_score)
-            hits.append(SearchHit(text=doc.page_content, source=source, score=score))
+            page_meta = doc.metadata.get("page")
+            page = int(page_meta) + 1 if isinstance(page_meta, int) else 1
+            hits.append(
+                SearchHit(
+                    text=doc.page_content,
+                    source=source,
+                    page=page,
+                    score=score,
+                    highlight=self._build_highlight(doc.page_content, query),
+                )
+            )
 
         hits.sort(key=lambda item: item.score, reverse=True)
         return hits[:k]
@@ -337,6 +349,24 @@ class AIService:
     @staticmethod
     def _tokenize(text: str) -> list[str]:
         return re.findall(r"[A-Za-z0-9_]+", text.lower())
+
+    def _build_highlight(self, text: str, query: str, max_len: int = 220) -> str:
+        normalized = re.sub(r"\s+", " ", text).strip()
+        if len(normalized) <= max_len:
+            return normalized
+
+        for token in self._tokenize(query):
+            match = re.search(re.escape(token), normalized, flags=re.IGNORECASE)
+            if match is None:
+                continue
+            half = max_len // 2
+            start = max(match.start() - half, 0)
+            end = min(start + max_len, len(normalized))
+            if start > 0:
+                return "..." + normalized[start:end].strip()
+            return normalized[start:end].strip()
+
+        return normalized[:max_len].rstrip() + "..."
 
     @staticmethod
     def _bm25_scores(corpus_tokens: list[list[str]], query_tokens: list[str]) -> list[float]:

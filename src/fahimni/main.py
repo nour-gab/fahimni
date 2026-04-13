@@ -5,7 +5,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from fahimni.api.v1 import ai, announcements, auth, courses, grades, messages
+from fahimni.api.v1 import ai, announcements, auth, courses, grades, materials, messages
 from fahimni.core.config import settings
 
 logging.basicConfig(level=settings.log_level)
@@ -34,6 +34,7 @@ def create_app() -> FastAPI:
     app.include_router(messages.router, prefix="/api/v1")
     app.include_router(grades.router, prefix="/api/v1")
     app.include_router(ai.router, prefix="/api/v1")
+    app.include_router(materials.router, prefix="/api/v1")
 
     @app.get("/health")
     async def health() -> dict[str, str]:
