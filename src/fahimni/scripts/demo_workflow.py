@@ -27,8 +27,8 @@ from fahimni.models.learning_event import LearningEventType
 from fahimni.models.user import User, UserRole
 from fahimni.services.ai_service import AIService
 
-DEMO_PROFESSOR_EMAIL = "professor.demo@fahimni.local"
-DEMO_STUDENT_EMAIL = "student.demo@fahimni.local"
+DEMO_PROFESSOR_EMAIL = "professor.demo@fahimni.com"
+DEMO_STUDENT_EMAIL = "student.demo@fahimni.com"
 DEMO_COURSE_CODE = "FAH-101"
 DEMO_COURSE_TITLE = "Foundations of Algorithms"
 DEMO_COURSE_TEXT = """

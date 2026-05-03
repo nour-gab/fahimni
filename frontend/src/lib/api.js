@@ -67,7 +67,9 @@ export function register(body) {
 }
 
 export function login(body) {
-  return request("/api/v1/auth/login", { method: "POST", body });
+  // Only send email and password for login
+  const { email, password } = body;
+  return request("/api/v1/auth/login", { method: "POST", body: { email, password } });
 }
 
 export function me(token) {
