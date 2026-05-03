@@ -1,5 +1,7 @@
 """Announcement schemas for course-wide communication."""
 
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, Field
 
 from .common import ORMBaseSchema
@@ -14,8 +16,8 @@ class AnnouncementCreate(BaseModel):
 
 
 class AnnouncementResponse(ORMBaseSchema):
-    id: str
-    course_id: str
-    author_id: str
+    id: UUID
+    course_id: UUID
+    author_id: UUID
     title: str
     body: str

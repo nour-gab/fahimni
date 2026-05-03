@@ -6,6 +6,7 @@ import io
 import logging
 import re
 import uuid
+from dataclasses import asdict
 from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -239,7 +240,7 @@ class AIService:
             "student_id": student_id,
             "tutor_agent": tutor,
             "quiz_agent": quiz,
-            "search_agent": [hit.__dict__ for hit in search_hits],
+            "search_agent": [asdict(hit) for hit in search_hits],
             "planner_agent": planner,
         }
 

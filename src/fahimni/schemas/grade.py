@@ -1,5 +1,7 @@
 """Assignment and grade schemas."""
 
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, Field
 
 from .common import ORMBaseSchema
@@ -22,16 +24,16 @@ class GradeCreate(BaseModel):
 
 
 class AssignmentResponse(ORMBaseSchema):
-    id: str
-    course_id: str
+    id: UUID
+    course_id: UUID
     title: str
     description: str
     total_points: float
 
 
 class GradeResponse(ORMBaseSchema):
-    id: str
-    assignment_id: str
-    student_id: str
+    id: UUID
+    assignment_id: UUID
+    student_id: UUID
     score: float
     feedback: str

@@ -12,7 +12,7 @@ from fahimni.db.base import Base
 from fahimni.db.session import get_db
 from fahimni.main import app
 
-TEST_DATABASE_URL = "postgresql+asyncpg://fahimni:fahimni@localhost:5432/fahimni_test"
+TEST_DATABASE_URL = "postgresql+asyncpg://fahimni:fahimni@localhost:5433/fahimni_test"
 
 test_engine = create_async_engine(TEST_DATABASE_URL, echo=False)
 TestSessionLocal = async_sessionmaker(bind=test_engine, class_=AsyncSession, expire_on_commit=False)

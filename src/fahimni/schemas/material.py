@@ -1,6 +1,7 @@
 """Schemas for course material lifecycle, archive resources, and learning telemetry."""
 
 from datetime import datetime
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -24,8 +25,8 @@ class CourseMaterialCreate(BaseModel):
 
 
 class CourseMaterialResponse(ORMBaseSchema):
-    id: str
-    course_id: str
+    id: UUID
+    course_id: UUID
     title: str
     material_type: MaterialType
     source_type: MaterialSourceType
@@ -34,7 +35,7 @@ class CourseMaterialResponse(ORMBaseSchema):
     version: int
     is_current: bool
     storage_url: str
-    created_by: str | None
+    created_by: UUID | None
 
 
 class ArchiveResourceCreate(BaseModel):
@@ -51,9 +52,9 @@ class ArchiveResourceCreate(BaseModel):
 
 
 class ArchiveResourceResponse(ORMBaseSchema):
-    id: str
-    course_id: str
-    material_id: str | None
+    id: UUID
+    course_id: UUID
+    material_id: UUID | None
     title: str
     resource_type: ArchiveResourceType
     year: int
@@ -62,7 +63,7 @@ class ArchiveResourceResponse(ORMBaseSchema):
     difficulty: ArchiveDifficulty
     file_url: str
     processed: bool
-    created_by: str | None
+    created_by: UUID | None
 
 
 class EventTrackRequest(BaseModel):
@@ -84,9 +85,9 @@ class UserProgressUpsertRequest(BaseModel):
 
 
 class UserProgressResponse(ORMBaseSchema):
-    id: str
-    user_id: str
-    course_id: str
+    id: UUID
+    user_id: UUID
+    course_id: UUID
     topic: str
     mastery_score: float
     last_seen: datetime

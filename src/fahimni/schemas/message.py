@@ -1,5 +1,7 @@
 """Private messaging schemas."""
 
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, Field
 
 from .common import ORMBaseSchema
@@ -13,7 +15,7 @@ class MessageCreate(BaseModel):
 
 
 class MessageResponse(ORMBaseSchema):
-    id: str
-    sender_id: str
-    recipient_id: str
+    id: UUID
+    sender_id: UUID
+    recipient_id: UUID
     content: str

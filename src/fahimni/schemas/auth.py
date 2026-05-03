@@ -1,5 +1,7 @@
 """Authentication request/response schemas."""
 
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 from fahimni.models.user import UserRole
@@ -29,7 +31,7 @@ class TokenResponse(BaseModel):
 
 
 class UserResponse(ORMBaseSchema):
-    id: str
+    id: UUID
     email: EmailStr
     full_name: str
     role: UserRole

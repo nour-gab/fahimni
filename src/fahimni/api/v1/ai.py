@@ -1,5 +1,7 @@
 """AI router endpoints for RAG, hybrid search, OCR, tutoring, and analytics."""
 
+from dataclasses import asdict
+
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
 from fahimni.agents.orchestrator_agent import OrchestratorAgent
@@ -45,7 +47,7 @@ async def hybrid_search(
     ai: AIService = Depends(get_ai_service),
 ) -> dict[str, object]:
     hits = ai.hybrid_search(course_id=payload.course_id, query=payload.query, k=payload.k)
-    return {"results": [hit.__dict__ for hit in hits]}
+    return {"results": [asdict(hit) for hit in hits]}
 
 
 @router.post("/upload/pdf")
